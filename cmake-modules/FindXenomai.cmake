@@ -149,8 +149,13 @@ if(NOT $ENV{XENOMAI_ROOT_DIR} STREQUAL "")
   mark_as_advanced(XENOMAI_ROOT_DIR)
 endif()
 
+if(DEFINED ENV{SDKTARGETSYSROOT} AND NOT DEFINED Xenomai_ROOT_DIR)
+  message("Found $SDKTARGETSYSROOT = $ENV{SDKTARGETSYSROOT}, using as Xenomai_ROOT_DIR and settings DESTDIR")
+  set(Xenomai_ROOT_DIR "$ENV{SDKTARGETSYSROOT}")
+  SET(ENV{DESTDIR} $ENV{SDKTARGETSYSROOT})
+endif()
 # set the search paths
-set( Xenomai_SEARCH_PATH /usr/local /usr $ENV{XENOMAI_ROOT_DIR} ${Xenomai_ROOT_DIR})
+set( Xenomai_SEARCH_PATH /usr/local /usr $ENV{XENOMAI_ROOT_DIR} ${Xenomai_ROOT_DIR} ${Xenomai_ROOT_DIR}/usr/)
 
 # searching kernel headers 
 # Find kernel headers
