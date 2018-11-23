@@ -39,7 +39,7 @@
 #   - Xenomai_${SKIN}_DL_FLAGS # Direct Linker Flags
 # From Xenomai 3.0.2. If you want to build a shared library
 #   - Xenomai_${SKIN}_LDFLAGS_LIBRARIES
-#   - Xenomai_${SKIN}_DL_FLAGS_LIBRARIES"
+#   - Xenomai_${SKIN}_DL_FLAGS_LIBRARIES
 #
 # Specific var for compatibility with Johns Hopkins University (JHU) FindXenomai
 #
@@ -54,7 +54,7 @@
 #
 # Example usage:
 #
-# find_package(Xenomai 2.6.4 POSIX REQUIRED)
+# find_package(Xenomai 2.6.4 REQUIRED POSIX)
 # message(STATUS "Xenomai found with theses skins: ${Xenomai_SKINS}")
 # # You have some sources xeno-example ${XENO_EXAMPLE_SRC}
 # 
@@ -149,8 +149,13 @@ if(NOT $ENV{XENOMAI_ROOT_DIR} STREQUAL "")
   mark_as_advanced(XENOMAI_ROOT_DIR)
 endif()
 
+if(DEFINED ENV{SDKTARGETSYSROOT} AND NOT DEFINED Xenomai_ROOT_DIR)
+  message("Found $SDKTARGETSYSROOT = $ENV{SDKTARGETSYSROOT}, using as Xenomai_ROOT_DIR and settings DESTDIR")
+  set(Xenomai_ROOT_DIR "$ENV{SDKTARGETSYSROOT}")
+  SET(ENV{DESTDIR} $ENV{SDKTARGETSYSROOT})
+endif()
 # set the search paths
-set( Xenomai_SEARCH_PATH /usr/local /usr $ENV{XENOMAI_ROOT_DIR} ${Xenomai_ROOT_DIR})
+set( Xenomai_SEARCH_PATH /usr/local /usr $ENV{XENOMAI_ROOT_DIR} ${Xenomai_ROOT_DIR} ${Xenomai_ROOT_DIR}/usr/)
 
 # searching kernel headers 
 # Find kernel headers
