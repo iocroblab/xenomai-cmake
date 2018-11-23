@@ -39,7 +39,7 @@
 #   - Xenomai_${SKIN}_DL_FLAGS # Direct Linker Flags
 # From Xenomai 3.0.2. If you want to build a shared library
 #   - Xenomai_${SKIN}_LDFLAGS_LIBRARIES
-#   - Xenomai_${SKIN}_DL_FLAGS_LIBRARIES"
+#   - Xenomai_${SKIN}_DL_FLAGS_LIBRARIES
 #
 # Specific var for compatibility with Johns Hopkins University (JHU) FindXenomai
 #
@@ -54,7 +54,7 @@
 #
 # Example usage:
 #
-# find_package(Xenomai 2.6.4 POSIX REQUIRED)
+# find_package(Xenomai 2.6.4 REQUIRED POSIX)
 # message(STATUS "Xenomai found with theses skins: ${Xenomai_SKINS}")
 # # You have some sources xeno-example ${XENO_EXAMPLE_SRC}
 # 
